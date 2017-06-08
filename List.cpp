@@ -30,7 +30,7 @@ List::List()
 	for(int i = 0; i <= 9; i++ )
 	{
 		mainArray[i] = new Patient[initialSize];
-		elementTracker[i] = initialSize;
+		elementTracker[i] = 0;
 	}
 
 	// Patient a;
