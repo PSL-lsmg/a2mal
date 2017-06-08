@@ -1,125 +1,92 @@
 /*
- *	List.cpp
- *	
- *	Class Description: List data collection ADT.
- *	Class Invariant: Data collection witht he following characteristics:
- *					- Each element is unique.
- *					- The elements are always ordered in the ascending order based on the care card number
- *					  even when a new element is added.
+ * List.h
  *
+ * Class Description: A value-oriented List data collection ADT.
+ * Class Invariant: Data collection with the following characteristics:
+ *                   - Each element is unique (no duplicates).
+ *                   - It is sorted by ascending sort order of its elements.
+ *                   - Its data structure is expandable: when full, it expands to accommodate
+ *                     new insertion. This is done unbeknown to the client code.
  *
- *	Last odified on: May 2017
- *	Author: Jun Wei(Jason) Li
+ * Last modified on: May 2017
+ * Author: AL
  */
-/*
-#include <iostream>
-#include "List.h"
+
 #include <string>
+#include "Patient.h"
+#include "List.h"
+
+using namespace std;
 
 
-// Default Constructor
-// Description: Create a list with zero element.
+
+// We must add at least 1 constructor and a destructor
+
+// Default constructor
 List::List()
 {
-	elementCount = 0;
-	capacity = MAX_ELEMENTS;
+    
 }
+
+// Other constructor
+//List::List(string careCard)
+//{
+//    
+//}
+
+// Destructor
+
+
+
+// *** Start of Public Interface ***
+// Note: Public Interface must not be modified.
 
 // Description: Returns the total element count currently stored in List.
 int List::getElementCount() const
 {
-	return elementCount;
+    return 1;
 }
 
 // Description: Insert an element.
-// Precondition: newElement must not already be in data collection.  
-// Postcondition: newElement inserted and elementCount has been incremented.  
-bool List::insert(const Patient& newElement)	//COMPLETED
+//              When "this" List is full, its data structure is expanded to accommodate
+//              a new element. This is done unbeknown to the client code.
+//              If the insertion is successful, true is returned otherwise, false is returned.
+// Precondition: newElement must not already be in data collection.
+// Postcondition: newElement inserted and the appropriate elementCount has been incremented.
+bool List::insert(const Patient& newElement)
 {
-	//check if already existed based on the care card of the patient
-	for(int i = 0; i < elementCount; i++)
-	{
-		if(elements[i] == newElement || elementCount >= MAX_ELEMENTS)
-		{
-			return false;
-		}
-	}
-	//find the optimal place to put the patient
-	int position = elementCount;
-	for(int j = 0; j < elementCount; j++)
-	{
-		if(elements[j] > newElement)
-		{
-			position = j;
-			break;
-		}
-	}
-	//shift the remaining elements to the right
-	for(int k = elementCount; k > position; k--)
-	{
-		elements[k] = elements[k-1];
-	}
-	elements[position] = newElement;
-	elementCount++;
-	return true;
+    return false;
 }
 
-// Description: Remove an element. 
-// Postcondition: toBeRemoved is removed and elementCount has been decremented.
-bool List::remove(const Patient& toBeRemoved)	//COMPLETED
+// Description: Remove an element.
+//              If the removal is successful, true is returned otherwise, false is returned.
+// Postcondition: toBeRemoved is removed, the appropriate elementCount has been decremented.
+bool List::remove( const Patient& toBeRemoved )
 {
-	int position;
-	bool removed = false;
-	//Search for the Patient
-	for(int i = 0 ; i < capacity; i++)
-	{
-		if(elements[i] == toBeRemoved)
-		{
-			position = i;
-			removed = true;
-		}
-	}
-	//Shift the other patients to the left of the list
-	if(removed)
-	{
-		for(int j = position; j < elementCount - 1; j++)
-		{
-			elements[j] = elements[j+1];
-		}
-		elementCount--;
-	}
-	return removed;
+    return false;
 }
 
 // Description: Remove all elements.
-void List::removeAll()	//COMPLETED
+void List::removeAll()
 {
-	elementCount = 0;
+    
 }
 
-// Description: Search for target element.
-//              Returns a pointer to the element if found,
+// Description: Search for target element and returns a pointer to it if found,
 //              otherwise, returns NULL.
 Patient* List::search(const Patient& target)
 {
-	for(int i = 0; i < elementCount; i++)
-	{
-		if(elements[i] == target)
-		{
-			return &elements[i];
-		}
-	}
-	return NULL;
+    for(int i = 0; i < elementCount; i++)
+    {
+        if(elements[i] == target)
+        {
+            return &elements[i];
+        }
+    }
 }
 
-// Description: Prints all elements stored in List.
+// Description: Prints all n elements stored in List in sort order and does so in O(n).
 void List::printList()
 {
-	//print the list
-	for(int f = 0; f < elementCount; f++)
-	{
-		elements[f].printPatient();
-	}
+    
 }
-*/
-

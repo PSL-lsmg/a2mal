@@ -24,6 +24,13 @@ class List  {
 private:
     
     // We must complete this section
+    static const int MAX_ELEMENTS = 9;
+    int elementCount;
+    int capacity;
+    Patient elements[MAX_ELEMENTS];
+    Patient elementTracker[0];
+    
+    
     
     
 public:
