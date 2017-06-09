@@ -26,17 +26,20 @@ using namespace std;
 // Default constructor
 List::List()
 {
+	mainArray = new Patient*[10];
+
 	//initialize Patient arrays
 	for(int i = 0; i <= 9; i++ )
 	{
-		mainArray[i] = new Patient[initialSize];
+		mainArray[i] = new Patient[INITIALSIZE];
 		elementTracker[i] = 0;
+		capacityTracker[i] = INITIALSIZE;
 	}
 
 	// Patient a;
-	// mainArray[0][0] = a;
-	// cout << mainArray[0][0].getName() << endl;
-
+	// mainArray[0][1] = a;
+	// cout << mainArray[0][1].getName() << endl;
+	// cout << sizeof(mainArray[0]) << endl;
 }
 
 List::List(const List& lst)
@@ -52,7 +55,12 @@ List::~List()
 // Description: Returns the total element count currently stored in List.
 int List::getElementCount() const
 {
-	return 0;
+	int total = 0;
+	for(int i = 0; i <= 9; i++)
+	{
+		total += elementTracker[i];
+	}
+	return total;
 }
 
 // Description: Insert an element.
@@ -63,8 +71,39 @@ int List::getElementCount() const
 // Postcondition: newElement inserted and the appropriate elementCount has been incremented.	
 bool List::insert(const Patient& newElement)
 {
+	int digit = newElement.getCareCard().at(0) - '0';
+	//check if the patient already exist in the system
+	for(int j = 0; j < elementTracker[digit]; j++)
+	{
+		if(mainArray[digit][j] == newElement)
+		{
+			return false;
+		}
+	}
+	//insert element
+	if(elementTracker[digit] < capacityTracker[digit])
+	{
+		mainArray[digit][elementTracker[digit]] = newElement;
+		elementTracker[digit]++;
+	}
+	else //expanding array
+	{
+		cout << "new array created...";
+		Patient* expandedList = new Patient[capacityTracker[digit]*2];
+		for(int i = 0; i < elementTracker[digit]; i++)
+		{
+			expandedList[i] = mainArray[digit][i];
+		}
+		//delete the old array
+		delete [] mainArray[digit];
+		cout << "old array deleted" << endl;
+		mainArray[digit] = expandedList;
 
-	return false;
+		//insert element
+		mainArray[digit][elementTracker[digit]] = newElement;
+		elementTracker[digit]++;
+	}
+	return true;
 }
 
 // Description: Remove an element. 
@@ -91,7 +130,13 @@ Patient* List::search(const Patient& target)
 // Description: Prints all n elements stored in List in sort order and does so in O(n).
 void List::printList()
 {
-
+	for(int i = 0; i < 10; i++)
+	{
+		for(int j = 0; j < elementTracker[i]; j++)
+		{
+			cout << mainArray[i][j].getCareCard() << endl;
+		}
+	}
 }
 	
 // *** End of Public Interface ***

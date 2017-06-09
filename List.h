@@ -23,10 +23,10 @@ class List  {
 
 private:	
 // We must complete this section
-	int initialSize = 3;
-	Patient** mainArray = new Patient*[10];
+	static const int INITIALSIZE = 1;
+	Patient** mainArray;
 	int elementTracker[10];
-
+	int capacityTracker[10];
    
 public:
 
