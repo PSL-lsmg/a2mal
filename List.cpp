@@ -88,15 +88,16 @@ bool List::insert(const Patient& newElement)
 	}
 	else //expanding array
 	{
-		cout << "new array created...";
+		cout << "[DEBUGGING]---new array created..." ;
 		Patient* expandedList = new Patient[capacityTracker[digit]*2];
+		capacityTracker[digit] = capacityTracker[digit] * 2;
 		for(int i = 0; i < elementTracker[digit]; i++)
 		{
 			expandedList[i] = mainArray[digit][i];
 		}
 		//delete the old array
 		delete [] mainArray[digit];
-		cout << "old array deleted" << endl;
+		cout << "old array deleted... new capacity = " << capacityTracker[digit] << endl;
 		mainArray[digit] = expandedList;
 
 		//insert element
@@ -111,13 +112,37 @@ bool List::insert(const Patient& newElement)
 // Postcondition: toBeRemoved is removed, the appropriate elementCount has been decremented.	
 bool List::remove( const Patient& toBeRemoved)
 {
-	return false;
+	int position;
+	bool removed = false;
+	int digit = toBeRemoved.getCareCard().at(0) - '0';
+	for(int i = 0; i < elementTracker[digit]; i++)
+	{
+		if(mainArray[digit][i] == toBeRemoved)
+		{
+			position = i;
+			removed = true;
+		}
+	}
+
+	//Shift the other patients to the left of the list
+	if(removed)
+	{
+		for(int j = position; j < elementTracker[digit] - 1; j++)
+		{
+			mainArray[digit][j] = mainArray[digit][j+1];
+		}
+		elementTracker[digit]--;
+	}
+	return removed;
 }
 	
 // Description: Remove all elements.
 void List::removeAll()
 {
-
+	for(int i = 0; i < 10; i++)
+	{
+		elementTracker[i] = 0;
+	}
 }
    
 // Description: Search for target element and returns a pointer to it if found,
