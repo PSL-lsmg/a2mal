@@ -29,7 +29,7 @@ List::List()
 	mainArray = new Patient*[10];
 
 	//initialize Patient arrays
-	for(int i = 0; i <= 9; i++ )
+	for(int i = 0; i < 10; i++ )
 	{
 		mainArray[i] = new Patient[INITIALSIZE];
 		elementTracker[i] = 0;
@@ -56,7 +56,7 @@ List::~List()
 int List::getElementCount() const
 {
 	int total = 0;
-	for(int i = 0; i <= 9; i++)
+	for(int i = 0; i < 10; i++)
 	{
 		total += elementTracker[i];
 	}
@@ -149,6 +149,15 @@ void List::removeAll()
 //              otherwise, returns NULL.
 Patient* List::search(const Patient& target)
 {
+	int digit = target.getCareCard().at(0) - '0';
+	for(int i = 0; i < elementTracker[digit]; i++)
+	{
+		if(mainArray[digit][i] == target)
+		{
+			return &mainArray[digit][i];
+		}
+
+	}
 	return NULL;
 }
    
