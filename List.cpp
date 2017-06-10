@@ -26,10 +26,10 @@ using namespace std;
 // Default constructor
 List::List()
 {
-	mainArray = new Patient*[10];
+	mainArray = new Patient*[TEN];
 
 	//initialize Patient arrays
-	for(int i = 0; i < 10; i++ )
+	for(int i = 0; i < TEN; i++ )
 	{
 		mainArray[i] = new Patient[INITIALSIZE];
 		elementTracker[i] = 0;
@@ -44,6 +44,7 @@ List::List()
 
 List::List(const List& lst)
 {
+	mainArray = new Patient*[TEN];
 
 }
 
@@ -56,7 +57,7 @@ List::~List()
 int List::getElementCount() const
 {
 	int total = 0;
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < TEN; i++)
 	{
 		total += elementTracker[i];
 	}
@@ -80,13 +81,8 @@ bool List::insert(const Patient& newElement)
 			return false;
 		}
 	}
-	//insert element
-	if(elementTracker[digit] < capacityTracker[digit])
-	{
-		mainArray[digit][elementTracker[digit]] = newElement;
-		elementTracker[digit]++;
-	}
-	else //expanding array
+	//Check if expansion needed
+	if(elementTracker[digit] >= capacityTracker[digit])
 	{
 		cout << "[DEBUGGING]---new array created..." ;
 		Patient* expandedList = new Patient[capacityTracker[digit]*2];
@@ -99,11 +95,24 @@ bool List::insert(const Patient& newElement)
 		delete [] mainArray[digit];
 		cout << "old array deleted... new capacity = " << capacityTracker[digit] << endl;
 		mainArray[digit] = expandedList;
-
-		//insert element
-		mainArray[digit][elementTracker[digit]] = newElement;
-		elementTracker[digit]++;
 	}
+	//find the optimal place to insert the patient
+	int position = elementTracker[digit];
+	for(int k = 0; k < elementTracker[digit]; k++)
+	{
+		if(mainArray[digit][k] > newElement)
+		{
+			position = k;
+			break;
+		}
+	}
+	//insert and shift the patient to the right
+	for(int l = elementTracker[digit]; l > position; l--)
+	{
+		mainArray[digit][l] = mainArray[digit][l-1];
+	}
+	mainArray[digit][elementTracker[digit]] = newElement;
+	elementTracker[digit]++;
 	return true;
 }
 
@@ -139,7 +148,7 @@ bool List::remove( const Patient& toBeRemoved)
 // Description: Remove all elements.
 void List::removeAll()
 {
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < TEN; i++)
 	{
 		elementTracker[i] = 0;
 	}
@@ -164,11 +173,11 @@ Patient* List::search(const Patient& target)
 // Description: Prints all n elements stored in List in sort order and does so in O(n).
 void List::printList()
 {
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < TEN; i++)
 	{
 		for(int j = 0; j < elementTracker[i]; j++)
 		{
-			cout << mainArray[i][j].getCareCard() << endl;
+			mainArray[i][j].printPatient();
 		}
 	}
 }
