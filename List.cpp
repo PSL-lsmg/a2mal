@@ -50,7 +50,12 @@ List::List(const List& lst)
 
 List::~List()
 {
-
+    for (int x = 0; x< TEN; x++)
+    {
+        delete[] mainArray[x];
+    }
+    delete[] mainArray;
+    std::cout<< "Destructor called." << std::endl;
 }
 
 // Description: Returns the total element count currently stored in List.

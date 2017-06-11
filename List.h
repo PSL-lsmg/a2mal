@@ -23,6 +23,7 @@ class List  {
 
 private:	
 // We must complete this section
+    static const int TEN = 10;
 	static const int INITIALSIZE = 1;
 	Patient** mainArray;
 	int elementTracker[10];
