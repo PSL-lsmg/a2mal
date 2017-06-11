@@ -44,8 +44,13 @@ List::List()
 
 List::List(const List& lst)
 {
-	mainArray = new Patient*[TEN];
-
+    std::cout << " Copy Constructor called.";
+    mainArray = new Patient*[TEN];
+    for (int j = 0; j < TEN; j++) {
+        mainArray[j] = new Patient[TEN];
+        *(mainArray[j]) = *(lst.mainArray[j]);
+    }
+    
 }
 
 List::~List()
