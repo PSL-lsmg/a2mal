@@ -55,6 +55,7 @@ int main()
 				break;
 			default: done = true;
 		}
+		cin.ignore();
 	}
 	cout << "Ended" << endl;
 	return 0;
@@ -71,6 +72,7 @@ void addPatient(List& patientList)
 	{
 		cout << "Enter care card number: ";
 		cin >> careCardNum;
+
 		//Check for non-digits
 		for(unsigned int i = 0; i < careCardNum.length(); i++)
 		{
@@ -83,6 +85,13 @@ void addPatient(List& patientList)
 			{
 				valid = true;
 			}
+		}
+
+		//Check for correct number of digits
+		if(careCardNum.length() != 10)
+		{
+			valid = false;
+			cout << "Error: care card must be 10 digits" << endl;
 		}
 	}
 	Patient newPatient(careCardNum);
@@ -205,5 +214,3 @@ string successOrFail(bool success)
 	}
 	return "FAILED!";
 }
-
-
