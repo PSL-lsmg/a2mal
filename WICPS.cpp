@@ -121,8 +121,34 @@ void searchPatient(List& patientList)
 	//Search for patient with care card num
 	cout << "*****Searching*****" << endl;
 	string careCardNum;
-	cout << "Enter care card number: ";
-	cin >> careCardNum;
+    bool valid = false;
+    while(!valid)
+    {
+        cout << "Enter care card number: ";
+        cin >> careCardNum;
+        
+        //Check for non-digits
+        for(unsigned int i = 0; i < careCardNum.length(); i++)
+        {
+            if(!isdigit(careCardNum[i]))
+            {
+                cout << "Error: Numbers only" << endl;
+                break;
+            }
+            if(i == careCardNum.length() - 1 )
+            {
+                valid = true;
+            }
+        }
+        
+        //Check for correct number of digits
+        if(careCardNum.length() != 10)
+        {
+            valid = false;
+            cout << "Error: care card must be 10 digits" << endl;
+        }
+    }
+
 	Patient tempPatient(careCardNum);
 	Patient* foundPatient = patientList.search(tempPatient);
 	//check if patient found
@@ -146,8 +172,33 @@ void modifyPatient(List& patientList)
 	//search for patient with care card num
 	cout << "*****Modifying*****" << endl;
 	string careCardNum;
-	cout << "Enter care card number: ";
-	cin >> careCardNum;
+    bool valid = false;
+    while(!valid)
+    {
+        cout << "Enter care card number: ";
+        cin >> careCardNum;
+        
+        //Check for non-digits
+        for(unsigned int i = 0; i < careCardNum.length(); i++)
+        {
+            if(!isdigit(careCardNum[i]))
+            {
+                cout << "Error: Numbers only" << endl;
+                break;
+            }
+            if(i == careCardNum.length() - 1 )
+            {
+                valid = true;
+            }
+        }
+        
+        //Check for correct number of digits
+        if(careCardNum.length() != 10)
+        {
+            valid = false;
+            cout << "Error: care card must be 10 digits" << endl;
+        }
+    }
 	Patient tempPatient(careCardNum);
 	Patient* foundPatient = patientList.search(tempPatient);
 	//if found, prompt to change information
