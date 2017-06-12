@@ -20,7 +20,6 @@
 
 using namespace std;
 
-
 // We must add at least 1 constructor and a destructor
 	
 // Default constructor
@@ -31,36 +30,44 @@ List::List()
 	//initialize Patient arrays
 	for(int i = 0; i < TEN; i++ )
 	{
-		mainArray[i] = new Patient[INITIALSIZE];
+		mainArray[i] = new Patient[INITIAL_SIZE];
 		elementTracker[i] = 0;
-		capacityTracker[i] = INITIALSIZE;
+		capacityTracker[i] = INITIAL_SIZE;
 	}
-
-	// Patient a;
-	// mainArray[0][1] = a;
-	// cout << mainArray[0][1].getName() << endl;
-	// cout << sizeof(mainArray[0]) << endl;
 }
 
+// Copy constructor
 List::List(const List& lst)
 {
-    std::cout << " Copy Constructor called.";
+	cout << " Copy Constructor called.";
     mainArray = new Patient*[TEN];
-    for (int j = 0; j < TEN; j++) {
-        mainArray[j] = new Patient[TEN];
-        *(mainArray[j]) = *(lst.mainArray[j]);
+    for (int j = 0; j < TEN; j++)
+    {
+        mainArray[j] = new Patient[lst.capacityTracker[j]];
+        //copy the patients
+        for(int k = 0; k < lst.elementTracker[j]; k++)
+        {
+        	Patient temp(lst.mainArray[j][k].getCareCard());
+        	temp.setName(lst.mainArray[j][k].getName());
+        	temp.setAddress(lst.mainArray[j][k].getAddress());
+        	temp.setPhone(lst.mainArray[j][k].getPhone());
+        	temp.setEmail(lst.mainArray[j][k].getEmail());
+        	mainArray[j][k] = temp;
+        }
+        elementTracker[j] = lst.elementTracker[j];
+        capacityTracker[j] = lst.capacityTracker[j];
     }
-    
 }
 
+// Destructor
 List::~List()
 {
-    for (int x = 0; x< TEN; x++)
-    {
-        delete[] mainArray[x];
-    }
+	for (int x = 0; x< TEN; x++)		
+	{	
+		delete[] mainArray[x];		
+    }		
     delete[] mainArray;
-    std::cout<< "Destructor called." << std::endl;
+    cout<< "Destructor called." << endl;
 }
 
 // Description: Returns the total element count currently stored in List.
@@ -116,12 +123,13 @@ bool List::insert(const Patient& newElement)
 			break;
 		}
 	}
+
 	//insert and shift the patient to the right
 	for(int l = elementTracker[digit]; l > position; l--)
 	{
 		mainArray[digit][l] = mainArray[digit][l-1];
 	}
-	mainArray[digit][elementTracker[digit]] = newElement;
+	mainArray[digit][position] = newElement;
 	elementTracker[digit]++;
 	return true;
 }
@@ -142,7 +150,6 @@ bool List::remove( const Patient& toBeRemoved)
 			removed = true;
 		}
 	}
-
 	//Shift the other patients to the left of the list
 	if(removed)
 	{

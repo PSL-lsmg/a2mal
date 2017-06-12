@@ -23,8 +23,8 @@ class List  {
 
 private:	
 // We must complete this section
-    static const int TEN = 10;
-	static const int INITIALSIZE = 1;
+	static const int TEN = 10;	// 0 to 9
+	static const int INITIAL_SIZE = 1;
 	Patient** mainArray;
 	int elementTracker[10];
 	int capacityTracker[10];
