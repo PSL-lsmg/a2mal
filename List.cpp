@@ -12,7 +12,6 @@
  * Author: AL
  */
 
-#pragma once
 #include <iostream>
 #include <string>
 #include "Patient.h"
@@ -39,7 +38,6 @@ List::List()
 // Copy constructor
 List::List(const List& lst)
 {
-	cout << " Copy Constructor called.";
     mainArray = new Patient*[TEN];
     for (int j = 0; j < TEN; j++)
     {
@@ -67,7 +65,6 @@ List::~List()
 		delete[] mainArray[x];		
     }		
     delete[] mainArray;
-    cout<< "Destructor called." << endl;
 }
 
 // Description: Returns the total element count currently stored in List.
@@ -101,7 +98,6 @@ bool List::insert(const Patient& newElement)
 	//Check if expansion needed
 	if(elementTracker[digit] >= capacityTracker[digit])
 	{
-		cout << "[DEBUGGING]---new array created..." ;
 		Patient* expandedList = new Patient[capacityTracker[digit]*2];
 		capacityTracker[digit] = capacityTracker[digit] * 2;
 		for(int i = 0; i < elementTracker[digit]; i++)
@@ -110,7 +106,6 @@ bool List::insert(const Patient& newElement)
 		}
 		//delete the old array
 		delete [] mainArray[digit];
-		cout << "old array deleted... new capacity = " << capacityTracker[digit] << endl;
 		mainArray[digit] = expandedList;
 	}
 	//find the optimal place to insert the patient

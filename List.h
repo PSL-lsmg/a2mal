@@ -11,7 +11,6 @@
  * Last modified on: May 2017
  * Author: AL
  */
-
 #pragma once
 #include <string>
 #include "Patient.h"
