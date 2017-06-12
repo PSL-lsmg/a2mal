@@ -213,26 +213,29 @@ void modifyPatient(List& patientList)
 			cout << "1)Name 2)Address 3)Phone 4)Email 5)Back to main menu : ";
 			cin >> select;
 			string info;
-			cin.ignore();
 			switch(select)
 			{
 				case 1: cout << "New name: ";
+						cin.ignore();
 						getline(cin, info);
 						foundPatient->setName(info);
 						break;
 				case 2:	cout << "New address: ";
+						cin.ignore();
 						getline(cin, info);
 						foundPatient->setAddress(info);
 						break;
 				case 3:	cout << "New phone: ";
+						cin.ignore();
 						getline(cin, info);
 						foundPatient->setPhone(info);
 						break;
 				case 4:	cout << "New email: ";
+						cin.ignore();
 						getline(cin, info);
 						foundPatient->setEmail(info);
 						break;
-				default: done = true;
+				case 5: done = true;
 			}
 		}
 	}
