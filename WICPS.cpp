@@ -6,8 +6,8 @@
  *					  modify the information of a patient, and print the informations,
  *					  of all patients in ascending order.
  *
- * Last modified on: May 2017
- * Author: Jun Wei(Jason) Li
+ * Last modified on: June 2017
+ * Author: Jun Wei(Jason) Li, Priscilla (Fae Yein) Lee
  */
 
 #include <string>
