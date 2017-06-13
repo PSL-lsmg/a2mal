@@ -8,8 +8,8 @@
  *                   - Its data structure is expandable: when full, it expands to accommodate 
  *                     new insertion. This is done unbeknown to the client code.
  *
- * Last modified on: May 2017
- * Author: AL
+ * Last modified on: June 2017
+ * Author: Jason Li, Priscilla (Fae Yein) Lee
  */
 
 #include <iostream>
