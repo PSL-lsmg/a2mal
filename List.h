@@ -8,8 +8,8 @@
  *                   - Its data structure is expandable: when full, it expands to accommodate 
  *                     new insertion. This is done unbeknown to the client code.
  *
- * Last modified on: May 2017
- * Author: AL
+ * Last modified on: June 2017
+ * Author: Jason Li, Priscilla (Fae Yein) Lee
  */
 #pragma once
 #include <string>
@@ -23,14 +23,12 @@ class List  {
 private:	
 // We must complete this section
 	static const int TEN = 10;	// 0 to 9
-	static const int INITIAL_SIZE = 1;
+	static const int INITIAL_SIZE = 1;	// starting size
 	Patient** mainArray;
 	int elementTracker[10];
 	int capacityTracker[10];
    
 public:
-
-// We must add at least 1 constructor and a destructor
 	
 	// Default constructor
 	List();
